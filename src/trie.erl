@@ -103,6 +103,9 @@ search(Str, Leaves, SearchPrefix) ->
 search(Str, [{Key, [?END | _]} | _], _, Acc) when Str == Key ->
     lists:flatten(lists:reverse([Str | Acc]));
 
+search(Str, [{Key, _} | _], false, _) when Str == Key ->
+    undefined;
+
 search(_, [?END | _], true, Acc) ->
     lists:flatten(lists:reverse(Acc));
 
