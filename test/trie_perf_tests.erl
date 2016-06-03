@@ -73,9 +73,11 @@ sequential(Target, [X | Xs]) ->
 
 -spec regexp(nonempty_string(), list()) -> 'undefined' | nonempty_string().
 regexp(Target, Pattern) ->
-    case re:run(Target, Pattern, [global, {capture, first, list}]) of
+    case re:run(Target, Pattern, [{capture, none}]) of
         nomatch ->
             undefined;
+        match ->
+            ok;
         {match, [Result | _]} ->
             Result
     end.
@@ -173,12 +175,26 @@ words() ->
      "speaking","testable","happen","teaching","hopeless",
      "bedroom","hoping","favourite","suspicious",
      "mother","listen","bookcase","millimetre","headmistress",
-      "ridiculous","dursley","bookshelves","rolled",
+     "ridiculous","dursley","bookshelves","rolled",
      "consideration","telling","stopped","genetic", "sceptical"].
 
 target_words() ->
-    ["and","dad","harry","harry","if","mum","nothing","now", "professor","that","you","a","a","able","about","admit", "and","and","and","any","anything","are","around", "attached","be","be","be","be","been","can","clear", "different","do","does","doesn","doesn","evidence", "experiment","eyes","fair","father","feel","figure","going", "going","happen","haven","hi","how","if","if","instead", "it","it","just","know","levitate","like","ll","magic", "magician","mistaken","not","now","of","or","out","peoples", "play","professor","professor","re","re","s","s","s","s", "s","said","say","say","says","sceptical","should","should", "so","sufficient","t","t","t","t","that","that","that", "that","that","that","the","the","this","to","to","to","to", "to","trick","turn","way","we","when","when","wires","work", "wouldn","you","you","you","you","you","you","you","you", "your"].
+    ["now","just","to","be","clear","harry","said","if","the",
+     "professor","does","levitate","you","dad","when","you",
+     "know","you","haven't","been","attached","to","any","wires",
+     "that's","going","to","be","sufficient","evidence","you're",
+     "not","going","to","turn","around","and","say","that",
+     "it's","a","magician's","trick","that","wouldn't","be",
+     "fair","play","if","you","feel","that","way","you","should",
+     "say","so","now","and","we","can","figure","out","a",
+     "different","experiment","instead","harry's","father",
+     "professor","his","eyes","and","you","mum","your","says",
+     "that","the","professor","should","be","able","to","do",
+     "this","and","if","that","doesn't","happen","you'll",
+     "admit","you're","mistaken","nothing","about","how","magic",
+     "doesn't","work","when","peoples","are","sceptical","of",
+     "it","or","anything","like","that"].
 
 target() ->
-    "Now, just to be clear, Harry said, if the professor does levitate you, Dad, when you know you haven't been attached to any wires, that's going to be sufficient evidence. You're not going to turn around and say that it's a magician's trick. That wouldn't be fair play. If you feel that way, you should say so now, and we can figure out a different experiment instead. Harry's father, Professor his eyes. And you, Mum, your says that the professor should be able to do this, and if that doesn't happen, you'll admit you're mistaken. Nothing about how magic doesn't work when peoples are sceptical of it, or anything like that.".
+    "now, just to be clear, harry said, if the professor does levitate you, dad, when you know you haven't been attached to any wires, that's going to be sufficient evidence. you're not going to turn around and say that it's a magician's trick. that wouldn't be fair play. if you feel that way, you should say so now, and we can figure out a different experiment instead. harry's father, professor his eyes. and you, mum, your says that the professor should be able to do this, and if that doesn't happen, you'll admit you're mistaken. nothing about how magic doesn't work when peoples are sceptical of it, or anything like that.".
 
