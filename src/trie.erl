@@ -119,9 +119,9 @@ search(Str, [{Key, ChildLeaves} | TailLeaves], SearchPrefix, Acc) ->
     case compare(Str, Key) of
         eq ->
             case factorize(Str, Key) of
-                [CommonPrefix, RPrefix] ->
-                    search(RPrefix, ChildLeaves, SearchPrefix, [CommonPrefix | Acc]);
-                [_, _, _] ->
+                [Key, RPrefix] ->
+                    search(RPrefix, ChildLeaves, SearchPrefix, [Key | Acc]);
+                _ ->
                     undefined
             end;
         lt ->

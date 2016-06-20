@@ -92,7 +92,7 @@ search_test_() ->
      {timeout,  1, [{"Search prefix word in Trie",  fun search_prefix_tests/0}]}].
 
 search_tests() ->
-    Leaves = [{"hell", [{leaf, []}, {"o", [{leaf,[]}, {"w", [{leaf, []}, {"een", [{leaf, []}]}]}]}]},
+    Leaves = [{"hell", [{leaf, []}, {"o", [{leaf, []}, {"w", [{leaf, []}, {"een", [{leaf, []}]}]}]}]},
               {"lovely", [{leaf, []}]},
               {"wor", [{"k", [{leaf, []}]}, {"ld", [{leaf, []}]}]}],
 
@@ -113,7 +113,7 @@ search_tests() ->
     ok.
 
 search_prefix_tests() ->
-    Leaves = [{"hell", [{leaf, []}, {"o", [{leaf,[]}, {"w", [{leaf, []}, {"een", [{leaf, []}]}]}]}]},
+    Leaves = [{"hell", [{leaf, []}, {"o", [{leaf, []}, {"w", [{leaf, []}, {"een", [{leaf, []}]}]}]}]},
               {"lovely", [{leaf, []}]},
               {"wor", [{"k", [{leaf, []}]}, {"ld", [{leaf, []}]}]}],
 
@@ -125,6 +125,10 @@ search_prefix_tests() ->
     ?assertEqual("world",       trie:search_prefix("world",     Leaves)),
 
     ?assertEqual("lovely",      trie:search_prefix("lovely",    Leaves)),
+
+    ?assertEqual(undefined,     trie:search_prefix("h",         Leaves)),
+    ?assertEqual(undefined,     trie:search_prefix("lov",       Leaves)),
+    ?assertEqual(undefined,     trie:search_prefix("wo",        Leaves)),
     ok.
 
 new_test() ->
